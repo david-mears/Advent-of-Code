@@ -7,8 +7,10 @@ def change_string_once(string)
   
   to_change = []
   string.chars.each.with_index do |letter, index|
-    if to_change == [] && index+1 != string.length
-      if string[index] != string[index+1] && string[index].downcase == string[index+1].downcase
+    
+    if to_change == [] && index < string.length-1
+      next_letter = string[index+1]
+      if letter != next_letter && letter.downcase == next_letter.downcase
         to_change.push(index)
       end
     end
@@ -29,8 +31,13 @@ def change_string_once(string)
   
 end
 
-puts change_string_once(gets.chomp)
-
-previous_string = input 
+previous_string = ''
 until previous_string == input
+  puts input.length
+  previous_string = input
+  input = change_string_once(input)
 end
+
+puts "finished"
+
+puts input
